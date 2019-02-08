@@ -7,3 +7,7 @@ set -e WORKON_HOME
 set -U WORKON_HOME ~/.venvs
 set -e PIPENV_CACHE_DIR
 set -U PIPENV_CACHE_DIR ~/.pipenv_cache
+
+# Set the EDITOR
+set -e EDITOR
+set -U EDITOR vim
