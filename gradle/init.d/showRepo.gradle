@@ -1,0 +1,24 @@
+// Apply the plugin
+apply plugin: ShowRepoPlugin
+
+class ShowRepoPlugin implements Plugin<Gradle> {
+    void apply(Gradle gradle) {
+        gradle.allprojects { project ->
+            project.task('showRepositories') {
+                doLast {
+                    repositories.each {
+                        println "repository: ${it.name} ('${it.url}')"
+                    }
+                }
+            }
+            
+           project.task('showBuildRepo'){
+               doLast {
+                   project.buildscript.repositories.each {
+                        println "repository: ${it.name} ('${it.url}')"
+                   }
+               }
+           }
+        }
+    }
+}
