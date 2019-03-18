@@ -1,0 +1,7 @@
+{
+  "insecure-registries": [
+    "docker-registry:8082",
+    "docker-registry:8083"
+  ],
+  "disable-legacy-registry": true
+}

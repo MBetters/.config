@@ -1,0 +1,10 @@
+# interfaces(5) file used by ifup(8) and ifdown(8)
+
+# Loopback interface
+auto lo
+iface lo inet loopback
+
+# Make sure NetworkManager doesn't try to setup enp0s9 (the Eth bridge to the LAN)
+iface enp0s9 inet dhcp
+  mtu 1500 # for USRP SDRs communicating over UHD
+  dns-nameservers 8.8.8.8 8.8.4.4
