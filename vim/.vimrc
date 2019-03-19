@@ -10,3 +10,5 @@ set expandtab
 set number
 " turn off auto-commenting
 set paste
+" turn on the 'ruler' (shows 'line, char      %' position in file)
+set ruler
