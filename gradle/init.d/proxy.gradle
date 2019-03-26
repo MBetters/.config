@@ -2,12 +2,12 @@ apply plugin:EnterpriseRepositoryPlugin
 
 class EnterpriseRepositoryPlugin implements Plugin<Gradle> {
 
-    private static String ENTERPRISE_REPOSITORY_URL = "http://localhost:8081/repository/maven-public/"
+    private static String ENTERPRISE_REPOSITORY_URL = "http://nexus:8081/repository/maven-public/"
     
     private static boolean isEnterpriseAvailable() {
         return true;
         //def sout = new StringBuilder(), serr = new StringBuilder()
-        def proc = "wget -O /dev/null http://localhost:8081/repository/maven-public/".execute()
+        def proc = "wget -O /dev/null http://nexus:8081/repository/maven-public/".execute()
         //proc.consumeProcessOutput(sout, serr)
         proc.waitForOrKill(1000)
         def exitCode = proc.exitValue()
@@ -23,6 +23,8 @@ class EnterpriseRepositoryPlugin implements Plugin<Gradle> {
                 // Remove all repositories not pointing to the enterprise repository url
                 all { ArtifactRepository repo ->
                     if(repo instanceof FlatDirectoryArtifactRepository){
+                    }
+                    else if (repo.url.toString().startsWith("http://nexus")) {
                     }
                     else if (!(repo instanceof MavenArtifactRepository) ||
                           (repo.url.toString().startsWith("http") && repo.url.toString() != ENTERPRISE_REPOSITORY_URL)) {
@@ -41,6 +43,8 @@ class EnterpriseRepositoryPlugin implements Plugin<Gradle> {
                 // Remove all repositories not pointing to the enterprise repository url
                 all { ArtifactRepository repo ->
                     if(repo instanceof FlatDirectoryArtifactRepository){
+                    }
+                    else if (repo.url.toString().startsWith("http://nexus")) {
                     }
                     else if (!(repo instanceof MavenArtifactRepository) ||
                           (repo.url.toString().startsWith("http") && repo.url.toString() != ENTERPRISE_REPOSITORY_URL)) {
